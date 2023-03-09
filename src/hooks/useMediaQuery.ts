@@ -5,6 +5,11 @@ export const useMediaQuery = (query: string) => {
 
     useEffect(() => {
         const mediaQuery = window.matchMedia(query);
+
+        if (isMatching !== mediaQuery.matches) {
+            setIsMatching(mediaQuery.matches);
+        }
+
         const listener = () => setIsMatching(mediaQuery.matches);
         window.addEventListener("resize", listener);
         return () => window.removeEventListener("resize", listener);

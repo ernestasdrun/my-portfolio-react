@@ -9,7 +9,7 @@ interface SocialsButtonProps {
 const StyledSocialsButton = styled.button`
   position: relative;
   overflow: hidden;
-  border: 1px solid #fff;
+  border: 1px solid #000;
   background: none;
   border-radius: 50%;
   padding: 6px;
@@ -19,6 +19,7 @@ const StyledSocialsButton = styled.button`
     display: block;
     width: 26px;
     height: 26px;
+    //filter: invert(92%) sepia(67%) saturate(2%) hue-rotate(67deg) brightness(107%) contrast(101%);
   }
 
   :after {
@@ -26,8 +27,8 @@ const StyledSocialsButton = styled.button`
     position: absolute;
     width: inherit;
     height: inherit;
-    background-color: #fff;
-    border: 2px solid #fff;
+    background-color: #b0eb9e;
+    //border: 2px solid #fff;
     top: 0;
     bottom: 0;
     left: 0;
@@ -46,7 +47,7 @@ const StyledSocialsButton = styled.button`
 
 const SocialsButton = ({ source, alternative }: SocialsButtonProps) => {
   return (
-    <StyledSocialsButton>
+    <StyledSocialsButton onClick={() => console.log("test")}>
       <img src={source} alt={alternative} />
     </StyledSocialsButton>
   );

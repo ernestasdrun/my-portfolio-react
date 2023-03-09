@@ -1,10 +1,19 @@
 import React from "react";
-import { IconContext } from "react-icons/lib";
 import { SlMenu } from 'react-icons/sl';
+import { CgClose } from 'react-icons/cg';
 import styled from "styled-components";
 
-const StyledMenuButton = styled.button`
-    align-self: center;
+interface MenuButtonProps {
+    menuClose?: boolean,
+    handleToggleDrawer: () => void,
+}
+
+interface StyledMenuButtonProps {
+    menuClose: boolean,
+}
+
+const StyledMenuButton = styled.button<StyledMenuButtonProps>`
+    align-self: ${props => props.menuClose ? "flex-start" : "center"};
     padding: 2px;
     height: 30px;
     margin-left: 0.5rem;
@@ -20,13 +29,15 @@ const StyledMenuButton = styled.button`
     }
 `
 
-const MenuButton = () => {
+const MenuButton = ({ menuClose = false, handleToggleDrawer }: MenuButtonProps) => {
     return (
-        <IconContext.Provider value={{ className: 'react-icons' }}>
-            <StyledMenuButton>
+        <StyledMenuButton menuClose={menuClose} onClick={handleToggleDrawer}>
+            {menuClose ?
+                <CgClose />
+                :
                 <SlMenu />
-            </StyledMenuButton>
-        </IconContext.Provider>
+            }
+        </StyledMenuButton>
     );
 };
 

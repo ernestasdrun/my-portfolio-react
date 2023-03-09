@@ -1,8 +1,14 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledExperienceSection = styled.div`
+  background-color: #4badad;
+  height: 500px;
+`
 
 const ExperienceSection = () => {
   return (
-    <div>ExperienceSection</div>
+    <StyledExperienceSection>ExperienceSection</StyledExperienceSection>
   );
 };
 

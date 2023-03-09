@@ -10,6 +10,10 @@ export const useScrolled = (size: number | undefined) => {
     };
 
     useEffect(() => {
+        if (typeof size === "number" && size <= window.scrollY) {
+            setIsScrolled(size <= window.scrollY);
+        }
+
         window.addEventListener("scroll", listener);
         return () => window.removeEventListener("scroll", listener);
     }, [size]);

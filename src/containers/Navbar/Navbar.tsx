@@ -6,6 +6,7 @@ import githubIcon from "../../assets/icons/github.svg";
 import { useScrolled } from "../../hooks/useScrolled";
 import SocialsButton from "./buttons/SocialsButton";
 import MenuButton from "./buttons/MenuButton";
+import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
 
 interface NavbarProps {
     isSticky: boolean,
@@ -19,30 +20,53 @@ interface NavbarContainerProps {
 const NavbarContainer = styled.div<NavbarContainerProps>`
     ${props =>
         props.isSticky ?
-        `
-        position: fixed;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        width: 100%;
-        left: 0;
-        top: 0;
-        background-color: #58bd55e1;
-        padding: 0.8rem;
-        transform: ${props.isScrolled ? "translateY(0)" : "translateY(-100%)"};
-        transition: transform 0.2s ease-out;
-        `
-        :
-        `
-        position: static;
-        display: flex;
-        flex-direction: row;
-        background-color: #58bd55;
-        padding: 0.8rem;
-        box-shadow: 0 0 0 100vmax #58bd55;
-        clip-path: inset(0 -100vmax); 
-        `
+            
+            `
+            position: fixed;
+            justify-content: center;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: #fcfcfcf8;
+            transform: ${props.isScrolled ? "translateY(0)" : "translateY(-100%)"};
+            transition: transform 0.2s ease-out;
+            box-shadow: ${props.isScrolled ? "0 2px 5px 0 rgba(0, 0, 0, 0.7)" : "none"};
+            z-index: 1;
+            `
+            :
+            `
+            position: static;
+            background-color: #fcfcfc;
+            box-shadow: 0 0 0 100vmax #fcfcfc;
+            clip-path: inset(0 -100vmax);
+            ` 
+            
+            /*`
+            position: fixed;
+            justify-content: center;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: #fcfcfcf8;
+            transform: ${props.isScrolled ? "translateY(0)" : "translateY(-100%)"};
+            transition: transform 0.2s ease-out;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            `
+            :
+            `
+            position: sticky;
+            top: 0;
+            background-color: ${props.isScrolled ? "#fcfcfcf8" : "#fcfcfc"};
+            box-shadow: 0 0 0 100vmax #fcfcfc, 0 0 5px 0 #000000;
+            clip-path: inset(0 -100vmax);
+            z-index: 1;
+            `*/
     }
+
+    display: flex;
+    flex-direction: row;
+    padding: 0.8rem;
 
     > div {
         display: flex;
@@ -75,12 +99,12 @@ const NavLink = styled.a`
     flex-direction: column;
     text-decoration: none;
     font-size: 1.1rem;
-    font-weight: 500;
-    color: #fff;
+    font-weight: 700;
+    color: #000;
 
     :after {
         content: "";
-        border: 1px solid #fff;
+        border: 2px solid #5fb645;
         border-radius: 15%;
         transform: scaleX(0%);
         transition: transform .3s;
@@ -96,38 +120,46 @@ const Navbar = ({ isSticky }: NavbarProps) => {
     const navRef = useRef<HTMLDivElement>(null);
     const [clientHeight, setClientHeight] = useState<number | undefined>(undefined);
     const isScrolled = useScrolled(clientHeight);
-
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     useEffect(() => {
         if (isSticky) setClientHeight(navRef.current?.clientHeight);
     }, [navRef, isMobile]);
 
+    const handleToggleDrawer = () => {
+        setIsDrawerOpen(prevIsDrawerOpen => !prevIsDrawerOpen);
+        document.body.style.overflow = isDrawerOpen ? "auto" : "hidden";
+    };
+
     return (
-        <NavbarContainer ref={navRef} isSticky={isSticky} isScrolled={isScrolled}>
-            {isMobile ?
-                <div>
-                    <MenuButton />
+        <>
+            <NavbarContainer ref={navRef} isSticky={isSticky} isScrolled={isScrolled}>
+                {isMobile ?
                     <div>
-                        <SocialsButton source={linkedinIcon} alternative="linkedin" />
-                        <SocialsButton source={githubIcon} alternative="github" />
+                        <MenuButton handleToggleDrawer={handleToggleDrawer} />
+                        <div>
+                            <SocialsButton source={linkedinIcon} alternative="linkedin" />
+                            <SocialsButton source={githubIcon} alternative="github" />
+                        </div>
                     </div>
-                </div>
-                :
-                <div>
-                    <NavigationContainer>
-                        <NavLink href="#">About</NavLink>
-                        <NavLink href="#skills">Skills</NavLink>
-                        <NavLink href="#">Experience</NavLink>
-                        <NavLink href="#">Projects</NavLink>
-                        <NavLink href="#">Contact</NavLink>
-                    </NavigationContainer>
+                    :
                     <div>
-                        <SocialsButton source={linkedinIcon} alternative="linkedin" />
-                        <SocialsButton source={githubIcon} alternative="github" />
+                        <NavigationContainer>
+                            <NavLink href="#about">About</NavLink>
+                            <NavLink href="#skills">Skills</NavLink>
+                            <NavLink href="#experience">Experience</NavLink>
+                            <NavLink href="#projects">Projects</NavLink>
+                            <NavLink href="#contact">Contact</NavLink>
+                        </NavigationContainer>
+                        <div>
+                            <SocialsButton source={linkedinIcon} alternative="linkedin" />
+                            <SocialsButton source={githubIcon} alternative="github" />
+                        </div>
                     </div>
-                </div>
-            }
-        </NavbarContainer>
+                }
+            </NavbarContainer>
+            <NavbarDrawer isDrawerOpen={isDrawerOpen} handleToggleDrawer={handleToggleDrawer}/>
+        </>
     );
 };
 
