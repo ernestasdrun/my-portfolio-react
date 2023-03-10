@@ -4,9 +4,15 @@ import styled from "styled-components";
 interface SocialsButtonProps {
   source: string,
   alternative: string,
+  link: string,
+  bgColor: string,
 }
 
-const StyledSocialsButton = styled.button`
+interface StyledButtonProps {
+  bgColor: string,
+}
+
+const StyledSocialsButton = styled.button<StyledButtonProps>`
   position: relative;
   overflow: hidden;
   border: 1px solid #000;
@@ -22,13 +28,12 @@ const StyledSocialsButton = styled.button`
     //filter: invert(92%) sepia(67%) saturate(2%) hue-rotate(67deg) brightness(107%) contrast(101%);
   }
 
-  :after {
+  :before {
     content: "";
     position: absolute;
     width: inherit;
     height: inherit;
-    background-color: #b0eb9e;
-    //border: 2px solid #fff;
+    background-color: ${props => props.bgColor};
     top: 0;
     bottom: 0;
     left: 0;
@@ -41,13 +46,13 @@ const StyledSocialsButton = styled.button`
     
   :hover {
     cursor: pointer;
-    :after { transform: scale(100%); }
+    :before { transform: scale(100%); }
   }
 `
 
-const SocialsButton = ({ source, alternative }: SocialsButtonProps) => {
+const SocialsButton = ({ source, alternative, link, bgColor }: SocialsButtonProps) => {
   return (
-    <StyledSocialsButton onClick={() => console.log("test")}>
+    <StyledSocialsButton bgColor={bgColor} onClick={() => console.log("test")}>
       <img src={source} alt={alternative} />
     </StyledSocialsButton>
   );

@@ -6,7 +6,9 @@ const StyledFooter = styled.footer`
   align-items: center;
   justify-content: center;
   background-color: #f0f0f0;
-  height: 50px;
+  height: 70px;
+  box-shadow: 0 0 0 100vmax #f0f0f0;
+  clip-path: inset(0 -100vmax);
 `
 
 const Footer = () => {

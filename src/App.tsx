@@ -10,8 +10,13 @@ import SkillsSection from "./containers/SkillsSection/SkillsSection";
 import { IconContext } from "react-icons/lib";
 
 const PageContainer = styled.div`
+  //justify-self: center;
+  //display: flex;
+  //flex-direction: column;
+  //ustify-content: center;
+  //align-items: center;
   min-height: 100vh;
-  width: min(1600px, 100vw);
+  width: min(1600px, 100%);
   position: relative;
 `
 
@@ -22,12 +27,12 @@ const App = () => {
       <PageContainer>
         <Navbar isSticky={false} />
         {/*<Navbar isSticky={true} />*/}
-        <AboutSection />
+        {/*<AboutSection />*/}
         <SkillsSection />
-        <ExperienceSection />
+        {/*<ExperienceSection />*/}
         <ProjectsSection />
-        <ContactSection />
-        <Footer />
+        {/*<ContactSection />*/}
+        {/*<Footer />*/}
       </PageContainer>
     </IconContext.Provider>
   );

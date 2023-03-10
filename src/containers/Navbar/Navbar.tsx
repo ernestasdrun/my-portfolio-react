@@ -8,6 +8,9 @@ import SocialsButton from "./buttons/SocialsButton";
 import MenuButton from "./buttons/MenuButton";
 import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
 
+const LINKEDIN_LINK = "https://linkedin.com/in/ernestas-drungilas-38b202210";
+const GITHUB_LINK = "https://github.com/ernestasdrun";
+
 interface NavbarProps {
     isSticky: boolean,
 }
@@ -21,7 +24,7 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
     ${props =>
         props.isSticky ?
             
-            `
+            /*`
             position: fixed;
             justify-content: center;
             width: 100%;
@@ -39,9 +42,9 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
             background-color: #fcfcfc;
             box-shadow: 0 0 0 100vmax #fcfcfc;
             clip-path: inset(0 -100vmax);
-            ` 
+            ` */
             
-            /*`
+            `
             position: fixed;
             justify-content: center;
             width: 100%;
@@ -58,12 +61,12 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
             position: sticky;
             top: 0;
             background-color: ${props.isScrolled ? "#fcfcfcf8" : "#fcfcfc"};
-            box-shadow: 0 0 0 100vmax #fcfcfc, 0 0 5px 0 #000000;
+            //border-bottom: ${props.isScrolled ? "1px solid #020202f8" : "none"};
+            box-shadow: 0 0 0 100vmax #fcfcfc;
             clip-path: inset(0 -100vmax);
             z-index: 1;
-            `*/
+            `
     }
-
     display: flex;
     flex-direction: row;
     padding: 0.8rem;
@@ -123,7 +126,7 @@ const Navbar = ({ isSticky }: NavbarProps) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     useEffect(() => {
-        if (isSticky) setClientHeight(navRef.current?.clientHeight);
+        /*if (isSticky)*/ setClientHeight(navRef.current?.clientHeight);
     }, [navRef, isMobile]);
 
     const handleToggleDrawer = () => {
@@ -138,8 +141,8 @@ const Navbar = ({ isSticky }: NavbarProps) => {
                     <div>
                         <MenuButton handleToggleDrawer={handleToggleDrawer} />
                         <div>
-                            <SocialsButton source={linkedinIcon} alternative="linkedin" />
-                            <SocialsButton source={githubIcon} alternative="github" />
+                            <SocialsButton source={linkedinIcon} alternative="linkedin" link={LINKEDIN_LINK} bgColor="#b0eb9e" />
+                            <SocialsButton source={githubIcon} alternative="github" link={GITHUB_LINK} bgColor="#b0eb9e" />
                         </div>
                     </div>
                     :
@@ -152,8 +155,8 @@ const Navbar = ({ isSticky }: NavbarProps) => {
                             <NavLink href="#contact">Contact</NavLink>
                         </NavigationContainer>
                         <div>
-                            <SocialsButton source={linkedinIcon} alternative="linkedin" />
-                            <SocialsButton source={githubIcon} alternative="github" />
+                            <SocialsButton source={linkedinIcon} alternative="linkedin" link={LINKEDIN_LINK} bgColor="#b0eb9e" />
+                            <SocialsButton source={githubIcon} alternative="github" link={GITHUB_LINK} bgColor="#b0eb9e" />
                         </div>
                     </div>
                 }
