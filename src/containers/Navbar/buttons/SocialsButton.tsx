@@ -13,32 +13,25 @@ interface StyledButtonProps {
 }
 
 const StyledSocialsButton = styled.button<StyledButtonProps>`
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #000;
-  background: none;
-  border-radius: 50%;
-  padding: 6px;
   margin: 0 1.5rem 0 0rem;
-    
-  img {
-    display: block;
-    width: 26px;
-    height: 26px;
-    //filter: invert(92%) sepia(67%) saturate(2%) hue-rotate(67deg) brightness(107%) contrast(101%);
-  }
+  padding: 6px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  position: relative;
+  background: none;
+  overflow: hidden;
 
   :before {
     content: "";
-    position: absolute;
     width: inherit;
     height: inherit;
-    background-color: ${props => props.bgColor};
+    border-radius: 50%;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    border-radius: 50%;
+    background-color: ${props => props.bgColor};
     transform: scale(0%);
     transition: transform .3s;
     z-index: -1;
@@ -47,6 +40,13 @@ const StyledSocialsButton = styled.button<StyledButtonProps>`
   :hover {
     cursor: pointer;
     :before { transform: scale(100%); }
+  }
+
+  img {
+    display: block;
+    width: 26px;
+    height: 26px;
+    //filter: invert(92%) sepia(67%) saturate(2%) hue-rotate(67deg) brightness(107%) contrast(101%);
   }
 `
 

@@ -6,24 +6,26 @@ import projects from "../../data/projects";
 const ProjectsContainer = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 1rem 0.5rem;
+    row-gap: 2rem;
+    padding: 2rem 1rem 5rem 1rem;
     background-color: #eef3ab;
     box-shadow: 0 0 0 100vmax #eef3ab;
     clip-path: inset(0 -100vmax);
-    row-gap: 2rem;
 
     h2 {
-        text-align: center;
-        font-size: clamp(1.625rem, 1.5313rem + 0.4688vw, 2.1rem);
         margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: clamp(1.7rem, 1.5313rem + 0.4688vw, 2.1rem);
     }
 
     @media screen and (min-width: 600px) {
-        padding: 2rem;
+        padding: 2rem 2rem 5rem 2rem;
+        h2 { margin-bottom: 2.5rem; }
     }
 
     @media screen and (min-width: 1000px) {
-        padding: 3rem;
+        padding: 5rem 3rem 8rem 3rem;
+        h2 { margin-bottom: 4rem; }
     }
 `
 

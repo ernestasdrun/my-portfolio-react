@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import { SiTypescript } from "react-icons/si"
 
 interface SkillProps {
     iconColor?: string,
@@ -17,25 +16,37 @@ const StyledSkill = styled.div<StyledSkillProps>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 135px;
+    padding: 1rem 0;
     border-radius: 10px;
-    padding: 1rem;
-    width: 190px;
     background-color: #f8f8f8;
 
+    :hover {
+        box-shadow: 0 5px 0 0 #e2e2e2;
+        transform: translateY(-5px);
+    }
+
     .react-icons, img {
-        height: 45px;
-        width: 45px;
+        height: 40px;
+        width: 40px;
         color: ${props => props.iconColor || "none"};
         user-select: none;
     }
 
-    h4 {
-        margin-top: 5px;
+    h4 { margin-top: 5px; }
+
+    @media screen and (min-width: 600px) {
+        width: 160px;
+        padding: 1rem;
+
+        .react-icons, img {
+            height: 45px;
+            width: 45px;
+        }
     }
 
-    :hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 0 0 #e2e2e2;
+    @media screen and (min-width: 1000px) {
+        width: 190px;
     }
 `
 

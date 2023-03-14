@@ -17,7 +17,7 @@ const ContentContainer = styled.div`
 
 const AboutSection = () => {
   return (
-    <AboutContainer>
+    <AboutContainer id="about">
       <ContentContainer>
         <h1>Lorem ipsum</h1>
         <h2>Lorem ipsum</h2>

@@ -19,7 +19,7 @@ const StyledCard = styled.div<StyledCardProps>`
     display: flex;
     flex-direction: column;
     background-color: #e1e78e;
-    padding: 1rem;
+    padding: 0.6rem;
     border-radius: 20px;
     z-index: 1;
 

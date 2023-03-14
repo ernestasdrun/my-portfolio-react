@@ -14,19 +14,18 @@ interface StyledMenuButtonProps {
 
 const StyledMenuButton = styled.button<StyledMenuButtonProps>`
     align-self: ${props => props.menuClose ? "flex-start" : "center"};
-    padding: 2px;
     height: 30px;
+    padding: 2px;
     margin-left: 0.5rem;
     border: none;
     background: none;
+
     .react-icons {
         width: 26px;
         height: 26px;
     }
 
-    :hover {
-        cursor: pointer;
-    }
+    :hover { cursor: pointer; }
 `
 
 const MenuButton = ({ menuClose = false, handleToggleDrawer }: MenuButtonProps) => {

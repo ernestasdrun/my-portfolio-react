@@ -7,9 +7,7 @@ import { useScrolled } from "../../hooks/useScrolled";
 import SocialsButton from "./buttons/SocialsButton";
 import MenuButton from "./buttons/MenuButton";
 import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
-
-const LINKEDIN_LINK = "https://linkedin.com/in/ernestas-drungilas-38b202210";
-const GITHUB_LINK = "https://github.com/ernestasdrun";
+import { LINKEDIN_LINK, GITHUB_LINK } from "../../data/socials";
 
 interface NavbarProps {
     isSticky: boolean,
@@ -23,31 +21,10 @@ interface NavbarContainerProps {
 const NavbarContainer = styled.div<NavbarContainerProps>`
     ${props =>
         props.isSticky ?
-            
-            /*`
-            position: fixed;
+            `
             justify-content: center;
             width: 100%;
-            left: 0;
-            top: 0;
-            background-color: #fcfcfcf8;
-            transform: ${props.isScrolled ? "translateY(0)" : "translateY(-100%)"};
-            transition: transform 0.2s ease-out;
-            box-shadow: ${props.isScrolled ? "0 2px 5px 0 rgba(0, 0, 0, 0.7)" : "none"};
-            z-index: 1;
-            `
-            :
-            `
-            position: static;
-            background-color: #fcfcfc;
-            box-shadow: 0 0 0 100vmax #fcfcfc;
-            clip-path: inset(0 -100vmax);
-            ` */
-            
-            `
             position: fixed;
-            justify-content: center;
-            width: 100%;
             left: 0;
             top: 0;
             background-color: #fcfcfcf8;
@@ -75,8 +52,8 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        max-width: 1600px;
         flex-grow: 1;
+        max-width: 1600px;
 
         > div { margin-left: auto; }
     }
@@ -161,7 +138,7 @@ const Navbar = ({ isSticky }: NavbarProps) => {
                     </div>
                 }
             </NavbarContainer>
-            <NavbarDrawer isDrawerOpen={isDrawerOpen} handleToggleDrawer={handleToggleDrawer}/>
+            <NavbarDrawer isDrawerOpen={isDrawerOpen} handleToggleDrawer={handleToggleDrawer} />
         </>
     );
 };

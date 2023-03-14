@@ -5,13 +5,11 @@ import {
   SiHtml5,
   SiCss3,
   SiStyledcomponents,
-  SiJavascript,
   SiTypescript,
   SiAxios,
   SiReacthookform,
   SiMui,
   SiReact,
-  SiReactrouter,
   SiNodedotjs,
   SiExpress,
   SiMongodb
@@ -27,23 +25,48 @@ import jsIcon from "../../assets/icons/javascript.svg";
 const StyledSkillsSection = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 5rem;
+  align-items: center;
+  padding: 2rem 1rem 5rem 1rem;
 
   h2 {
     align-self: center;
-    font-size: clamp(1.625rem, 1.5313rem + 0.4688vw, 2.1rem);
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: clamp(1.7rem, 1.5313rem + 0.4688vw, 2.1rem);
   }
 
   h3 {
-    font-size: 24px;
-    margin: 3rem 0 1rem 0;
+    margin: 4rem 0 2rem 0;
+    font-size: 23px;
+
+    &:first-of-type {
+      margin-top: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    padding: 2rem 2rem 5rem 2rem;
+
+    h2 { margin-bottom: 2.5rem; }
+
+    h3 {
+      margin: 5rem 0 2rem 0;
+      font-size: 24px;
+      &:first-of-type { margin-top: 2rem; }
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    padding: 5rem 3rem 8rem 3rem;
+    h2 { margin-bottom: 4rem; }
+    h3 { font-size: 25px; }
   }
 `
 
 const SkillsContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  text-align: center;
   flex-wrap: wrap;
   gap: 18px;
 `
