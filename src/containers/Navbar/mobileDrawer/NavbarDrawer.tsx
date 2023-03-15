@@ -49,7 +49,6 @@ const NavbarDrawer = ({ isDrawerOpen, handleToggleDrawer }: NavbarDrawerProps) =
             <nav>
                 <a href="#about">About</a>
                 <a href="#skills">Skills</a>
-                <a href="#experience">Experience</a>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
             </nav>

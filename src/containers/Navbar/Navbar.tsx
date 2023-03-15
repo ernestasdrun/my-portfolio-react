@@ -9,44 +9,20 @@ import MenuButton from "./buttons/MenuButton";
 import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
 import { LINKEDIN_LINK, GITHUB_LINK } from "../../data/socials";
 
-interface NavbarProps {
-    isSticky: boolean,
-}
-
 interface NavbarContainerProps {
     isScrolled: boolean,
-    isSticky: boolean,
 }
 
 const NavbarContainer = styled.div<NavbarContainerProps>`
-    ${props =>
-        props.isSticky ?
-            `
-            justify-content: center;
-            width: 100%;
-            position: fixed;
-            left: 0;
-            top: 0;
-            background-color: #fcfcfcf8;
-            transform: ${props.isScrolled ? "translateY(0)" : "translateY(-100%)"};
-            transition: transform 0.2s ease-out;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.7);
-            z-index: 1;
-            `
-            :
-            `
-            position: sticky;
-            top: 0;
-            background-color: ${props.isScrolled ? "#fcfcfcf8" : "#fcfcfc"};
-            //border-bottom: ${props.isScrolled ? "1px solid #020202f8" : "none"};
-            box-shadow: 0 0 0 100vmax #fcfcfc;
-            clip-path: inset(0 -100vmax);
-            z-index: 1;
-            `
-    }
     display: flex;
     flex-direction: row;
     padding: 0.8rem;
+    position: sticky;
+    top: 0;
+    background-color: ${props => props.isScrolled ? "#fcfcfcf8" : "#fcfcfc"};
+    box-shadow: 0 0 0 100vmax #fcfcfc;
+    clip-path: inset(0 -100vmax);
+    z-index: 1;
 
     > div {
         display: flex;
@@ -95,7 +71,7 @@ const NavLink = styled.a`
     }
 `
 
-const Navbar = ({ isSticky }: NavbarProps) => {
+const Navbar = () => {
     const isMobile = useMediaQuery("(max-width: 600px)");
     const navRef = useRef<HTMLDivElement>(null);
     const [clientHeight, setClientHeight] = useState<number | undefined>(undefined);
@@ -103,7 +79,7 @@ const Navbar = ({ isSticky }: NavbarProps) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
     useEffect(() => {
-        /*if (isSticky)*/ setClientHeight(navRef.current?.clientHeight);
+        setClientHeight(navRef.current?.clientHeight);
     }, [navRef, isMobile]);
 
     const handleToggleDrawer = () => {
@@ -113,7 +89,7 @@ const Navbar = ({ isSticky }: NavbarProps) => {
 
     return (
         <>
-            <NavbarContainer ref={navRef} isSticky={isSticky} isScrolled={isScrolled}>
+            <NavbarContainer ref={navRef} isScrolled={isScrolled}>
                 {isMobile ?
                     <div>
                         <MenuButton handleToggleDrawer={handleToggleDrawer} />
@@ -127,7 +103,6 @@ const Navbar = ({ isSticky }: NavbarProps) => {
                         <NavigationContainer>
                             <NavLink href="#about">About</NavLink>
                             <NavLink href="#skills">Skills</NavLink>
-                            <NavLink href="#experience">Experience</NavLink>
                             <NavLink href="#projects">Projects</NavLink>
                             <NavLink href="#contact">Contact</NavLink>
                         </NavigationContainer>

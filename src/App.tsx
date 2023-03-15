@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import AboutSection from "./containers/AboutSection/AboutSection";
 import ContactSection from "./containers/ContactSection/ContactSection";
-import ExperienceSection from "./containers/ExperienceSection/ExperienceSection";
 import Footer from "./containers/Footer/Footer";
 import Navbar from "./containers/Navbar/Navbar";
 import ProjectsSection from "./containers/ProjectsSection/ProjectsSection";
@@ -20,11 +19,9 @@ const App = () => {
   return (
     <IconContext.Provider value={{ className: 'react-icons' }}>
       <PageContainer>
-        <Navbar isSticky={false} />
-        {/*<Navbar isSticky={true} />*/}
+        <Navbar />
         <AboutSection />
         <SkillsSection />
-        {/*<ExperienceSection />*/}
         <ProjectsSection />
         <ContactSection />
         <Footer />
