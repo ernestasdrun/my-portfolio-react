@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 interface FormTextAreaProps {
@@ -17,10 +17,14 @@ interface StyledTextAreaProps {
 const StyledTextArea = styled.div<StyledTextAreaProps>`
     padding: 1rem 1rem 0.5rem 1rem;
     margin-top: 1rem;
-    border: 1px solid ${props => (props.fieldValue === "") ? "#000" : "#3aa830"};
+    border: 1px solid ${props => (props.fieldValue === "") ? "#a7a7a7" : "#3aa830"};
     border: 1px solid ${props => props.isError ? "#e20000" : "unset"};
     border-radius: 5px;
     position: relative;
+
+    :hover {
+        border: 1px solid ${props => (props.isError || (props.fieldValue !== "")) ? "unset" : "#3b3b3b"};
+    }
 
     :focus-within {
         border: 2px solid ${props => props.isError ? "#e20000" : "#3aa830"};

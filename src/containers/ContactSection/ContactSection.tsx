@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import FormInput from "./contactComponents/FormInput";
 import FormTextArea from "./contactComponents/FormTextArea";
@@ -6,6 +6,11 @@ import { TbSend } from "react-icons/tb";
 import { LINKEDIN_LINK } from "../../data/socials";
 import emailjs from "@emailjs/browser";
 import mailData from "../../data/mailData";
+import { GiCheckMark } from "react-icons/gi";
+
+interface ButtonProps {
+  isSending: boolean,
+}
 
 const StyledContactSection = styled.div`
   display: flex;
@@ -44,6 +49,49 @@ const StyledContactSection = styled.div`
   }
 `
 
+const SumbittedInfo = styled.div`
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-self: center;
+  width: min(600px, 100%);
+  min-height: 470px;
+  padding: 5rem 1rem 1rem 1rem;
+  position: relative;
+
+  h3 { font-size: 1.4rem; }
+
+  .react-icons {
+    height: 100px;
+    width: 100px;
+    align-self: center;
+    margin-top: 4rem;
+    color: #37a537;
+  }
+
+  @media screen and (min-width: 600px) {
+    h3 { font-size: 1.6rem; }
+
+    .react-icons {
+      height: 120px;
+      width: 120px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    width: max(400px, 45%);
+    min-height: calc(510px + 4rem);
+    h3 { font-size: 1.8rem; }
+
+    .react-icons {
+      height: 140px;
+      width: 140px;
+    }
+  }
+`
+
 const StyledForm = styled.form`
   flex-grow: 1;
   flex-shrink: 0;
@@ -70,7 +118,7 @@ const StyledForm = styled.form`
   }
 `
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<ButtonProps>`
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -88,11 +136,30 @@ const StyledButton = styled.button`
   :hover {
     background-color: #51cc76e1;
     cursor: pointer;
+
+    &[disabled] {
+      cursor: progress;
+    }
+  }
+
+  &[disabled] {
+    .react-icons {
+      color: ${props => props.isSending && "#000000"};
+    }
   }
 
   .react-icons {
     height: 22px;
     width: 22px;
+    transition: transform 1s, opacity 1s;
+    ${props => props.isSending && `
+    transform: translate(105px, -105px) scale(200%);
+    opacity: 0;
+    `}
+
+    @media screen and (min-width: 600px) {
+      ${props => props.isSending && `transform: translate(220px, -220px) scale(250%);`}
+    }
   }
 `
 
@@ -110,12 +177,15 @@ const ContactSection = () => {
   });
 
   const [isEmailError, setIsEmailError] = useState<boolean>(false);
+  const [isSending, setIsSending] = useState<boolean>(false);
+  const [isFormSent, setIsFormSent] = useState<boolean>(false);
 
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
 
   const form = useRef<HTMLFormElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, tag: string) => {
     setFormParams(prevState => ({ ...prevState, [tag]: event.target.value }));
@@ -154,30 +224,50 @@ const ContactSection = () => {
 
   async function sendForm(errorCount: number) {
     if (form.current && errorCount === 0 && isEmailError === false) {
+      buttonRef.current?.setAttribute("disabled", "");
+
       await emailjs.sendForm(mailData.SERVICE_ID, mailData.TEMPLATE_ID, form.current, mailData.PUBLIC_KEY)
         .then((result) => {
+          setIsSending(true);
+          setTimeout(() => {
+            buttonRef.current?.removeAttribute("disabled")
+            setIsSending(false);
+            setIsFormSent(true);
+          }, 1000);
           console.log(result.text);
         }, (error) => {
+          buttonRef.current?.removeAttribute("disabled")
           console.error(error.text);
         });
     }
   }
 
   return (
-    <StyledContactSection>
+    <StyledContactSection id="contact">
       <h2>You can contact me through <a href={LINKEDIN_LINK} target="_blank" rel="noreferrer">LinkedIn</a> or write me a message</h2>
-      <StyledForm ref={form} onSubmit={(e) => handleSubmit(e)} noValidate>
-        <fieldset>
-          <FormInput fieldName="Name" fieldValue={formParams.name} fieldType="text" tag="name" name="from_name" inputRef={nameRef} isError={isParamError.name} handleChange={handleChange} />
-          <FormInput fieldName="Email" fieldValue={formParams.email} fieldType="email" tag="email" name="from_email" inputRef={emailRef} isError={isParamError.email} isEmailError={isEmailError} handleChange={handleChange} />
-          <FormTextArea fieldValue={formParams.message} tag="message" inputRef={messageRef} isError={isParamError.message} handleChange={handleChange} />
-          <StyledButton>
-            Send
-            <TbSend />
-          </StyledButton>
-        </fieldset>
-      </StyledForm>
-    </StyledContactSection>
+      {isFormSent ?
+        <StyledForm ref={form} onSubmit={(e) => handleSubmit(e)} noValidate>
+          <fieldset>
+            <SumbittedInfo>
+              <h3>Your message was sent successfully!</h3>
+              <GiCheckMark />
+            </SumbittedInfo>
+          </fieldset>
+        </StyledForm>
+        :
+        <StyledForm ref={form} onSubmit={(e) => handleSubmit(e)} noValidate>
+          <fieldset>
+            <FormInput fieldName="Name" fieldValue={formParams.name} fieldType="text" tag="name" name="from_name" inputRef={nameRef} isError={isParamError.name} handleChange={handleChange} />
+            <FormInput fieldName="Email" fieldValue={formParams.email} fieldType="email" tag="email" name="from_email" inputRef={emailRef} isError={isParamError.email} isEmailError={isEmailError} handleChange={handleChange} />
+            <FormTextArea fieldValue={formParams.message} tag="message" inputRef={messageRef} isError={isParamError.message} handleChange={handleChange} />
+            <StyledButton ref={buttonRef} isSending={isSending}>
+              Send
+              <TbSend />
+            </StyledButton>
+          </fieldset>
+        </StyledForm>
+      }
+    </StyledContactSection >
   );
 };
 

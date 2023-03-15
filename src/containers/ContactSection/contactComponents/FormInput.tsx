@@ -26,11 +26,15 @@ const StyledInput = styled.div<StyledInputProps>`
     width: 100%;
     padding: 1rem 1px 3px 1px;
     border: none;
-    border-bottom: 1px solid ${props => (props.fieldValue === "") ? "#000" : "#3aa830"};
+    border-bottom: 1px solid ${props => (props.fieldValue === "") ? "#a7a7a7" : "#3aa830"};
     border-bottom: 1px solid ${props => props.isError ? "#e20000" : "unset"};
     outline: transparent;
     font-size: 16px;
     background: none;
+
+    :hover {
+      border-bottom: 1px solid ${props => (props.isError || (props.fieldValue !== "")) ? "unset" : "#3b3b3b"};
+    }
 
     :focus {
       border-bottom: 2px solid ${props => props.isError ? "#e20000" : "#3aa830"};
