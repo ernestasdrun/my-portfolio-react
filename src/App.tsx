@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React from "react";
+import styled from "styled-components";
+import AboutSection from "./containers/AboutSection/AboutSection";
+import ContactSection from "./containers/ContactSection/ContactSection";
+import Footer from "./containers/Footer/Footer";
+import Navbar from "./containers/Navbar/Navbar";
+import ProjectsSection from "./containers/ProjectsSection/ProjectsSection";
+import SkillsSection from "./containers/SkillsSection/SkillsSection";
+import { IconContext } from "react-icons/lib";
+import HeaderSection from "./containers/HeaderSection/HeaderSection";
 
-function App() {
-  const [count, setCount] = useState(0)
+const PageContainer = styled.div`
+  min-height: 100vh;
+  width: min(1600px, 100%);
+  position: relative;
+`
+
+const App = () => {
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <IconContext.Provider value={{ className: 'react-icons' }}>
+      <PageContainer>
+        <Navbar />
+        <HeaderSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <ContactSection />
+        <Footer />
+      </PageContainer>
+    </IconContext.Provider>
+  );
+};
 
-export default App
+export default App;
