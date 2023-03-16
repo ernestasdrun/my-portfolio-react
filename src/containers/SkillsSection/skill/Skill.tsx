@@ -13,11 +13,12 @@ interface StyledSkillProps {
 
 const StyledSkill = styled.div<StyledSkillProps>`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    width: 135px;
-    padding: 1rem 0;
+    justify-content: flex-start;
+    gap: 1rem;
+    width: 230px;
+    padding: 0.4rem 1rem;
     border-radius: 10px;
     background-color: #f8f8f8;
 
@@ -27,15 +28,19 @@ const StyledSkill = styled.div<StyledSkillProps>`
     }
 
     .react-icons, img {
-        height: 40px;
-        width: 40px;
+        height: 25px;
+        width: 25px;
         color: ${props => props.iconColor || "none"};
         user-select: none;
     }
 
     h4 { margin-top: 5px; }
-
+    
     @media screen and (min-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
         width: 160px;
         padding: 1rem;
 

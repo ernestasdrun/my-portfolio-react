@@ -7,6 +7,7 @@ import Navbar from "./containers/Navbar/Navbar";
 import ProjectsSection from "./containers/ProjectsSection/ProjectsSection";
 import SkillsSection from "./containers/SkillsSection/SkillsSection";
 import { IconContext } from "react-icons/lib";
+import HeaderSection from "./containers/HeaderSection/HeaderSection";
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -20,6 +21,7 @@ const App = () => {
     <IconContext.Provider value={{ className: 'react-icons' }}>
       <PageContainer>
         <Navbar />
+        <HeaderSection />
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
