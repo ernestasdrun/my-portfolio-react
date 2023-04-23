@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
   background-color: #f0f0f0;
   box-shadow: 0 0 0 100vmax #f0f0f0;
   clip-path: inset(0 -100vmax);
-`
+`;
 
 const Footer = () => {
   return (

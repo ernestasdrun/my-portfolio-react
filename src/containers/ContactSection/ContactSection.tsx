@@ -9,16 +9,13 @@ import mailData from "../../data/mailData";
 import { GiCheckMark } from "react-icons/gi";
 
 interface ButtonProps {
-  isSending: boolean,
+  isSending: boolean;
 }
 
-const StyledContactSection = styled.div`
+const StyledContactSection = styled.section`
   display: flex;
   flex-direction: column;
   padding: 2rem 1rem 5rem 1rem;
-  //background-color: #cfad91;
-  //box-shadow: 0 0 0 100vmax #eef3ab;
-  //clip-path: inset(0 -100vmax);
 
   h2 {
     margin-bottom: 1.5rem;
@@ -27,13 +24,17 @@ const StyledContactSection = styled.div`
 
     a {
       color: #3259d8;
-      :hover { opacity: 80%; }
+      :hover {
+        opacity: 80%;
+      }
     }
   }
 
   @media screen and (min-width: 600px) {
     padding: 2rem 5rem 5rem 5rem;
-    h2 { margin-bottom: 2.5rem; }
+    h2 {
+      margin-bottom: 2.5rem;
+    }
   }
 
   @media screen and (min-width: 1000px) {
@@ -47,7 +48,7 @@ const StyledContactSection = styled.div`
       text-align: left;
     }
   }
-`
+`;
 
 const SumbittedInfo = styled.div`
   flex-grow: 1;
@@ -61,7 +62,9 @@ const SumbittedInfo = styled.div`
   padding: 5rem 1rem 1rem 1rem;
   position: relative;
 
-  h3 { font-size: 1.4rem; }
+  h3 {
+    font-size: 1.4rem;
+  }
 
   .react-icons {
     height: 100px;
@@ -72,7 +75,9 @@ const SumbittedInfo = styled.div`
   }
 
   @media screen and (min-width: 600px) {
-    h3 { font-size: 1.6rem; }
+    h3 {
+      font-size: 1.6rem;
+    }
 
     .react-icons {
       height: 120px;
@@ -83,14 +88,16 @@ const SumbittedInfo = styled.div`
   @media screen and (min-width: 1000px) {
     width: max(400px, 45%);
     min-height: calc(510px + 4rem);
-    h3 { font-size: 1.8rem; }
+    h3 {
+      font-size: 1.8rem;
+    }
 
     .react-icons {
       height: 140px;
       width: 140px;
     }
   }
-`
+`;
 
 const StyledForm = styled.form`
   flex-grow: 1;
@@ -116,7 +123,7 @@ const StyledForm = styled.form`
       min-height: 510px;
     }
   }
-`
+`;
 
 const StyledButton = styled.button<ButtonProps>`
   display: inline-flex;
@@ -130,9 +137,10 @@ const StyledButton = styled.button<ButtonProps>`
   border-radius: 10px;
   font-weight: 600;
   font-size: 16px;
+  font-family: "Roboto";
   background-color: #51cc76;
   box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.2);
-  
+
   :hover {
     background-color: #51cc76e1;
     cursor: pointer;
@@ -144,7 +152,7 @@ const StyledButton = styled.button<ButtonProps>`
 
   &[disabled] {
     .react-icons {
-      color: ${props => props.isSending && "#000000"};
+      color: ${(props) => props.isSending && "#000000"};
     }
   }
 
@@ -152,16 +160,19 @@ const StyledButton = styled.button<ButtonProps>`
     height: 22px;
     width: 22px;
     transition: transform 1s, opacity 1s;
-    ${props => props.isSending && `
+    ${(props) =>
+      props.isSending &&
+      `
     transform: translate(105px, -105px) scale(200%);
     opacity: 0;
     `}
 
     @media screen and (min-width: 600px) {
-      ${props => props.isSending && `transform: translate(220px, -220px) scale(250%);`}
+      ${(props) =>
+        props.isSending && `transform: translate(220px, -220px) scale(250%);`}
     }
   }
-`
+`;
 
 const ContactSection = () => {
   const [formParams, setFormParams] = useState({
@@ -187,65 +198,87 @@ const ContactSection = () => {
   const form = useRef<HTMLFormElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, tag: string) => {
-    setFormParams(prevState => ({ ...prevState, [tag]: event.target.value }));
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    tag: string
+  ) => {
+    setFormParams((prevState) => ({ ...prevState, [tag]: event.target.value }));
 
     if (event.target.value === "") {
-      setIsParamError(prevState => ({ ...prevState, [tag]: true }));
-    } else if (event.target.type === "email" && emailRef.current?.validity.valid) {
+      setIsParamError((prevState) => ({ ...prevState, [tag]: true }));
+    } else if (
+      event.target.type === "email" &&
+      emailRef.current?.validity.valid
+    ) {
       setIsEmailError(false);
     } else {
-      setIsParamError(prevState => ({ ...prevState, [tag]: false }));
+      setIsParamError((prevState) => ({ ...prevState, [tag]: false }));
     }
-  }
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let errorCount = 0;
 
     if (nameRef.current?.value === "") {
-      setIsParamError(prevState => ({ ...prevState, name: true }));
+      setIsParamError((prevState) => ({ ...prevState, name: true }));
       errorCount++;
     }
     if (emailRef.current?.value === "") {
-      setIsParamError(prevState => ({ ...prevState, email: true }));
+      setIsParamError((prevState) => ({ ...prevState, email: true }));
       errorCount++;
     } else if (!emailRef.current?.validity.valid) {
       setIsEmailError(true);
       errorCount++;
     }
     if (messageRef.current?.value === "") {
-      setIsParamError(prevState => ({ ...prevState, message: true }));
+      setIsParamError((prevState) => ({ ...prevState, message: true }));
       errorCount++;
     }
 
     sendForm(errorCount);
-  }
+  };
 
   async function sendForm(errorCount: number) {
     if (form.current && errorCount === 0 && isEmailError === false) {
       buttonRef.current?.setAttribute("disabled", "");
 
-      await emailjs.sendForm(mailData.SERVICE_ID, mailData.TEMPLATE_ID, form.current, mailData.PUBLIC_KEY)
-        .then((result) => {
-          setIsSending(true);
-          setTimeout(() => {
-            buttonRef.current?.removeAttribute("disabled")
-            setIsSending(false);
-            setIsFormSent(true);
-          }, 1000);
-          console.log(result.text);
-        }, (error) => {
-          buttonRef.current?.removeAttribute("disabled")
-          console.error(error.text);
-        });
+      await emailjs
+        .sendForm(
+          mailData.SERVICE_ID,
+          mailData.TEMPLATE_ID,
+          form.current,
+          mailData.PUBLIC_KEY
+        )
+        .then(
+          (result) => {
+            setIsSending(true);
+            setTimeout(() => {
+              buttonRef.current?.removeAttribute("disabled");
+              setIsSending(false);
+              setIsFormSent(true);
+            }, 1000);
+          },
+          (error) => {
+            buttonRef.current?.removeAttribute("disabled");
+            console.error(error.text);
+          }
+        );
     }
   }
 
   return (
-    <StyledContactSection id="contact">
-      <h2>You can contact me through <a href={LINKEDIN_LINK} target="_blank" rel="noreferrer">LinkedIn</a> or write me a message</h2>
-      {isFormSent ?
+    <StyledContactSection id="contact" aria-labelledby="contacts-title">
+      <header id="contacts-title">
+        <h2>
+          You can contact me through{" "}
+          <a href={LINKEDIN_LINK} target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>{" "}
+          or write me a message
+        </h2>
+      </header>
+      {isFormSent ? (
         <StyledForm ref={form} onSubmit={(e) => handleSubmit(e)} noValidate>
           <fieldset>
             <SumbittedInfo>
@@ -254,20 +287,45 @@ const ContactSection = () => {
             </SumbittedInfo>
           </fieldset>
         </StyledForm>
-        :
+      ) : (
         <StyledForm ref={form} onSubmit={(e) => handleSubmit(e)} noValidate>
           <fieldset>
-            <FormInput fieldName="Name" fieldValue={formParams.name} fieldType="text" tag="name" name="from_name" inputRef={nameRef} isError={isParamError.name} handleChange={handleChange} />
-            <FormInput fieldName="Email" fieldValue={formParams.email} fieldType="email" tag="email" name="from_email" inputRef={emailRef} isError={isParamError.email} isEmailError={isEmailError} handleChange={handleChange} />
-            <FormTextArea fieldValue={formParams.message} tag="message" inputRef={messageRef} isError={isParamError.message} handleChange={handleChange} />
+            <FormInput
+              fieldName="Name"
+              fieldValue={formParams.name}
+              fieldType="text"
+              tag="name"
+              name="from_name"
+              inputRef={nameRef}
+              isError={isParamError.name}
+              handleChange={handleChange}
+            />
+            <FormInput
+              fieldName="Email"
+              fieldValue={formParams.email}
+              fieldType="email"
+              tag="email"
+              name="from_email"
+              inputRef={emailRef}
+              isError={isParamError.email}
+              isEmailError={isEmailError}
+              handleChange={handleChange}
+            />
+            <FormTextArea
+              fieldValue={formParams.message}
+              tag="message"
+              inputRef={messageRef}
+              isError={isParamError.message}
+              handleChange={handleChange}
+            />
             <StyledButton ref={buttonRef} isSending={isSending}>
               Send
               <TbSend />
             </StyledButton>
           </fieldset>
         </StyledForm>
-      }
-    </StyledContactSection >
+      )}
+    </StyledContactSection>
   );
 };
 

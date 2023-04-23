@@ -12,8 +12,8 @@ import {
   SiReact,
   SiNodedotjs,
   SiExpress,
-  SiMongodb
-} from "react-icons/si"
+  SiMongodb,
+} from "react-icons/si";
 import reactRouterIcon from "../../assets/icons/react-router.svg";
 import githubIcon from "../../assets/icons/github.svg";
 import vscodeIcon from "../../assets/icons/vscode.svg";
@@ -22,7 +22,7 @@ import reduxIcon from "../../assets/icons/redux.svg";
 import eslintIcon from "../../assets/icons/eslint.svg";
 import jsIcon from "../../assets/icons/javascript.svg";
 
-const StyledSkillsSection = styled.div`
+const StyledSkillsSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -47,21 +47,29 @@ const StyledSkillsSection = styled.div`
   @media screen and (min-width: 600px) {
     padding: 2rem 2rem 5rem 2rem;
 
-    h2 { margin-bottom: 2.5rem; }
+    h2 {
+      margin-bottom: 2.5rem;
+    }
 
     h3 {
       margin: 5rem 0 2rem 0;
       font-size: 24px;
-      &:first-of-type { margin-top: 2rem; }
+      &:first-of-type {
+        margin-top: 2rem;
+      }
     }
   }
 
   @media screen and (min-width: 1000px) {
     padding: 5rem 3rem 8rem 3rem;
-    h2 { margin-bottom: 4rem; }
-    h3 { font-size: 25px; }
+    h2 {
+      margin-bottom: 4rem;
+    }
+    h3 {
+      font-size: 25px;
+    }
   }
-`
+`;
 
 const SkillsContainer = styled.div`
   display: flex;
@@ -69,12 +77,14 @@ const SkillsContainer = styled.div`
   text-align: center;
   flex-wrap: wrap;
   gap: 18px;
-`
+`;
 
 const SkillsSection = () => {
   return (
-    <StyledSkillsSection id="skills">
-      <h2>List of skills and technologies that I use</h2>
+    <StyledSkillsSection id="skills" aria-labelledby="skills-title">
+      <header>
+        <h2 id="skills-title">List of skills and technologies that I use</h2>
+      </header>
       <h3>Tools</h3>
       <SkillsContainer>
         <Skill skillName="VS Code">
