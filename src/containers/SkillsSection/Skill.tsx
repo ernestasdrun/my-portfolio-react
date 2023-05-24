@@ -1,11 +1,10 @@
-import React, { ReactNode, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import useObserver from "../../../hooks/useObserver";
+import useObserver from "../../hooks/useObserver";
+import { ISkill } from "../../data/skills";
 
 interface SkillProps {
-  iconColor?: string;
-  skillName: string;
-  children: ReactNode;
+  skill: ISkill;
 }
 
 interface StyledSkillProps {
@@ -62,16 +61,18 @@ const StyledSkill = styled.div<StyledSkillProps>`
 
   @media screen and (prefers-reduced-motion: no-preference) {
     opacity: ${(props) => (props.isVisible ? "1" : "0")};
-    transition: opacity 1.2s ease;
+    transition: opacity 1.5s ease;
   }
 `;
 
-const Skill = ({ iconColor, skillName, children }: SkillProps) => {
+const Skill = ({ skill }: SkillProps) => {
+  const skillImagePath = "./src/assets/icons/";
+
   const skillRef = useRef(null);
   const [skillRefState, setSkillRefState] = useState(null);
 
   const isVisible = useObserver(skillRefState, {
-    rootMargin: "20px",
+    threshold: 0.5,
   });
 
   useEffect(() => {
@@ -79,9 +80,9 @@ const Skill = ({ iconColor, skillName, children }: SkillProps) => {
   }, [skillRef]);
 
   return (
-    <StyledSkill ref={skillRef} iconColor={iconColor} isVisible={isVisible}>
-      {children}
-      <h4>{skillName}</h4>
+    <StyledSkill ref={skillRef} isVisible={isVisible}>
+      <img draggable={false} src={skillImagePath + skill.image} alt={skill.name} />
+      <h4>{skill.name}</h4>
     </StyledSkill>
   );
 };

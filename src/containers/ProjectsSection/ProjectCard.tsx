@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { IProject } from "../../data/projects";
-import SocialsButton from "../Navbar/buttons/SocialsButton";
+import RoundedLinkButton from "../../components/buttons/RoundedLinkButton";
 import githubIcon from "../../assets/icons/github.svg";
 import webIcon from "../../assets/icons/website-click.svg";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -35,6 +35,11 @@ const StyledCard = styled.div<StyledCardProps>`
     column-gap: 2rem;
   }
 
+  @media screen and (prefers-reduced-motion: no-preference) {
+    opacity: ${(props) => (props.isVisible ? "1" : "0")};
+    transition: opacity 1.5s ease;
+  }
+
   @media screen and (min-width: 1000px) and (prefers-reduced-motion: no-preference) {
     opacity: ${(props) => (props.isVisible ? "1" : "0")};
     transform: ${(props) =>
@@ -51,7 +56,7 @@ const ImageContainer = styled.div`
   align-self: center;
   width: 250px;
   height: 139px;
-  border: 2px solid #555555;
+  border: 3px solid #555555;
   border-radius: 15px;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -81,13 +86,15 @@ const ProjectContent = styled.div`
   text-align: center;
 
   h3 {
-    font-size: clamp(1.5rem, 1.4531rem + 0.2344vw, 1.7rem);
+    font-size: clamp(1.5rem, 1.425rem + 0.375vw, 1.8rem);
     margin-bottom: 10px;
   }
 
-  p {
-    font-size: 1rem;
+  > p {
+    font-size: clamp(1rem, 0.975rem + 0.125vw, 1.1rem);
+    line-height: 1.4rem;
     margin-bottom: 10px;
+    color: rgb(75, 75, 75);
   }
 
   div {
@@ -116,7 +123,7 @@ const StyledDetails = styled.details`
 
     h4 {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: clamp(1.1rem, 1.0625rem + 0.1875vw, 1.25rem);
     }
 
     .react-icons {
@@ -128,7 +135,7 @@ const StyledDetails = styled.details`
 
     :hover {
       h4 {
-        color: #49472a;
+        color: rgb(73, 71, 42);
       }
       cursor: pointer;
     }
@@ -139,8 +146,23 @@ const StyledDetails = styled.details`
   }
 
   ul {
+    list-style: none;
     text-align: initial;
     margin-left: 1.3rem;
+    font-size: 1.05rem;
+    line-height: 1.55rem;
+    font-weight: 500;
+    color: rgb(71, 71, 71);
+
+    li {
+      ::before {
+        content: url("./src/assets/icons/tools.svg");
+        display: inline-block;
+        height: 11px;
+        width: 11px;
+        margin-inline: -15px 5px;
+      }
+    }
   }
 
   @media screen and (min-width: 1000px) {
@@ -182,13 +204,13 @@ const ProjectCard = ({ isReverse, project }: ProjectCardProps) => {
           </ul>
         </StyledDetails>
         <div>
-          <SocialsButton
+          <RoundedLinkButton
             source={webIcon}
             alternative="live"
             link={project.liveLink}
             bgColor="#fdffda"
           />
-          <SocialsButton
+          <RoundedLinkButton
             source={githubIcon}
             alternative="github"
             link={project.gitLink}

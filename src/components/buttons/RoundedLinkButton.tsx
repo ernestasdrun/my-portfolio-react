@@ -20,6 +20,7 @@ const StyledSocialsButton = styled.button<StyledButtonProps>`
   position: relative;
   background: none;
   overflow: hidden;
+  user-select: none;
 
   :before {
     content: "";

@@ -13,7 +13,7 @@
 }
 
 :root {
-  font-family: "Roboto";
+  font-family: Roboto, Arial, Helvetica, sans-serif;
   font-size: 16px;
 
   --primary-color: #c2ebc2;
@@ -46,5 +46,5 @@ p {
   justify-content: center;
   justify-items: center;
   align-content: center;
-  max-width: 100vw;
+  overflow: clip;
 }

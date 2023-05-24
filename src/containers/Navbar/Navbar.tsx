@@ -4,7 +4,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import githubIcon from "../../assets/icons/github.svg";
 import { useScrolled } from "../../hooks/useScrolled";
-import SocialsButton from "./buttons/SocialsButton";
+import RoundedLinkButton from "../../components/buttons/RoundedLinkButton";
 import MenuButton from "./buttons/MenuButton";
 import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
 import { LINKEDIN_LINK, GITHUB_LINK } from "../../data/socials";
@@ -13,7 +13,7 @@ interface NavbarContainerProps {
   isScrolled: boolean;
 }
 
-const NavbarContainer = styled.div<NavbarContainerProps>`
+const NavbarContainer = styled.nav<NavbarContainerProps>`
   display: flex;
   flex-direction: row;
   padding: 0.8rem;
@@ -37,7 +37,7 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
   }
 `;
 
-const NavigationContainer = styled.nav`
+const NavigationContainer = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: space-around;
@@ -101,13 +101,13 @@ const Navbar = () => {
               handleToggleDrawer={handleToggleDrawer}
             />
             <div>
-              <SocialsButton
+              <RoundedLinkButton
                 source={linkedinIcon}
                 alternative="linkedin"
                 link={LINKEDIN_LINK}
                 bgColor="#b0eb9e"
               />
-              <SocialsButton
+              <RoundedLinkButton
                 source={githubIcon}
                 alternative="github"
                 link={GITHUB_LINK}
@@ -124,13 +124,13 @@ const Navbar = () => {
               <NavLink href="#contact">Contact</NavLink>
             </NavigationContainer>
             <div>
-              <SocialsButton
+              <RoundedLinkButton
                 source={linkedinIcon}
                 alternative="linkedin"
                 link={LINKEDIN_LINK}
                 bgColor="#b0eb9e"
               />
-              <SocialsButton
+              <RoundedLinkButton
                 source={githubIcon}
                 alternative="github"
                 link={GITHUB_LINK}

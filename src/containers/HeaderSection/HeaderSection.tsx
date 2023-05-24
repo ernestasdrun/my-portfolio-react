@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import programmingImage from "../../assets/images/undraw_code_inspection_bdl7.svg";
+import resumeDocument from "../../assets/files/resume.pdf";
 
 const HeaderContainer = styled.section`
   display: flex;
@@ -111,7 +112,9 @@ const HeaderSection = () => {
           <h2>I&apos;m a Front-End developer</h2>
         </header>
         <div>
-          <a>Download Resume</a>
+          <a href={resumeDocument} download>
+            Download Resume
+          </a>
           <a href="#contact">Contact me</a>
         </div>
       </ContentContainer>
