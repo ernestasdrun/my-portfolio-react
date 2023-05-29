@@ -1,26 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import programmingImage from "../../assets/images/undraw_code_inspection_bdl7.svg"
+import programmingImage from "../../assets/images/undraw_code_inspection_bdl7.svg";
+import resumeDocument from "../../assets/files/resume.pdf";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 3rem;
   padding: 3rem 2rem 5rem 2rem;
-  background-color: #b5e2b5;
-  box-shadow: 0 0 0 100vmax #b5e2b5;
+  background-color: var(--primary-color);
+  box-shadow: 0 0 0 100vmax var(--primary-color);
   clip-path: inset(0 -100vmax);
-  
+
   @media screen and (min-width: 600px) {
     padding: 3rem 3rem 5rem 3rem;
   }
 
   @media screen and (min-width: 1000px) {
     flex-direction: row-reverse;
-    height: 450px;
-    padding: 5rem 9rem 8rem 9rem;
+    padding: 7rem 5rem 8rem 5rem;
   }
-`
+`;
 
 const ImageContainer = styled.div`
   display: flex;
@@ -34,20 +34,22 @@ const ImageContainer = styled.div`
 
   @media screen and (min-width: 600px) {
     img {
-        width: 60%;
-        height: 60%;
+      width: 60%;
+      height: 60%;
     }
   }
 
   @media screen and (min-width: 1000px) {
-    flex-grow: 1;
+    max-width: 530px;
+    max-height: 530px;
+    margin-right: auto;
 
     img {
-        width: 130%;
-        height: 130%;
+      width: 100%;
+      height: 100%;
     }
   }
-`
+`;
 
 const ContentContainer = styled.div`
   display: flex;
@@ -61,53 +63,66 @@ const ContentContainer = styled.div`
     margin-top: 5rem;
     gap: 1rem;
 
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 35px;
-        width: 200px;
-        border: 2px solid #2e5c34;
-        font-weight: 700;
-        font-size: 1rem;
-        text-decoration: none;
-        color: #000;
-        background: #ffffff6e;
-        transition: background-color .5s;
-    
-        :hover {
-          background-color: white;
-          cursor: pointer;
-        }
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 35px;
+      width: 200px;
+      border: 2px solid #000;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      color: #000;
+      background: #ffffff6e;
+      transition: background-color 0.5s;
+      user-select: none;
+
+      :hover {
+        background-color: #fff;
+        cursor: pointer;
       }
+    }
   }
 
+  h1 {
+    margin-bottom: 1rem;
+    font-size: clamp(1.9rem, 1.625rem + 1.375vw, 3rem);
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 1.2rem + 1vw, 2.2rem);
+  }
 
   @media screen and (min-width: 1000px) {
     text-align: end;
     align-self: center;
-    h1 { font-size: 2.2rem; }
-    h2 { font-size: 1.7rem; }
-    div { align-self: flex-end; }
+    div {
+      align-self: flex-end;
+    }
   }
-`
+`;
 
 const HeaderSection = () => {
-    return (
-        <HeaderContainer id="header">
-            <ContentContainer>
-                <h1>Hey, my name is Ernestas Drungilas</h1>
-                <h2>I&apos;m a Front-End developer</h2>
-                <div>
-                    <a>Download Resume</a>
-                    <a href="#contact">Contact me</a>
-                </div>
-            </ContentContainer>
-            <ImageContainer>
-                <img src={programmingImage} alt="programmer_image" />
-            </ImageContainer>
-        </HeaderContainer>
-    );
+  return (
+    <HeaderContainer id="header" aria-labelledby="header-title">
+      <ContentContainer>
+        <header>
+          <h1>Hi, my name is Ernestas Drungilas</h1>
+          <h2>I&apos;m a Front-End developer</h2>
+        </header>
+        <div>
+          <a href={resumeDocument} download>
+            Download Resume
+          </a>
+          <a href="#contact">Contact me</a>
+        </div>
+      </ContentContainer>
+      <ImageContainer>
+        <img src={programmingImage} alt="programmer_image" />
+      </ImageContainer>
+    </HeaderContainer>
+  );
 };
 
 export default HeaderSection;

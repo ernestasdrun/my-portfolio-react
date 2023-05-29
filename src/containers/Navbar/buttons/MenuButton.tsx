@@ -1,43 +1,37 @@
 import React from "react";
-import { SlMenu } from 'react-icons/sl';
-import { CgClose } from 'react-icons/cg';
+import { SlMenu } from "react-icons/sl";
+import { CgClose } from "react-icons/cg";
 import styled from "styled-components";
 
 interface MenuButtonProps {
-    menuClose?: boolean,
-    handleToggleDrawer: () => void,
+  isDrawerOpen: boolean;
+  handleToggleDrawer: () => void;
 }
 
-interface StyledMenuButtonProps {
-    menuClose: boolean,
-}
+const StyledMenuButton = styled.button`
+  align-self: center;
+  height: 30px;
+  padding: 2px;
+  margin-left: 0.5rem;
+  border: none;
+  background: none;
 
-const StyledMenuButton = styled.button<StyledMenuButtonProps>`
-    align-self: ${props => props.menuClose ? "flex-start" : "center"};
-    height: 30px;
-    padding: 2px;
-    margin-left: 0.5rem;
-    border: none;
-    background: none;
+  .react-icons {
+    width: 26px;
+    height: 26px;
+  }
 
-    .react-icons {
-        width: 26px;
-        height: 26px;
-    }
+  :hover {
+    cursor: pointer;
+  }
+`;
 
-    :hover { cursor: pointer; }
-`
-
-const MenuButton = ({ menuClose = false, handleToggleDrawer }: MenuButtonProps) => {
-    return (
-        <StyledMenuButton menuClose={menuClose} onClick={handleToggleDrawer}>
-            {menuClose ?
-                <CgClose />
-                :
-                <SlMenu />
-            }
-        </StyledMenuButton>
-    );
+const MenuButton = ({ isDrawerOpen, handleToggleDrawer }: MenuButtonProps) => {
+  return (
+    <StyledMenuButton onClick={handleToggleDrawer}>
+      {isDrawerOpen ? <CgClose /> : <SlMenu />}
+    </StyledMenuButton>
+  );
 };
 
 export default MenuButton;

@@ -13,12 +13,11 @@ const PageContainer = styled.div`
   min-height: 100vh;
   width: min(1600px, 100%);
   position: relative;
-`
+`;
 
 const App = () => {
-
   return (
-    <IconContext.Provider value={{ className: 'react-icons' }}>
+    <IconContext.Provider value={{ className: "react-icons" }}>
       <PageContainer>
         <Navbar />
         <HeaderSection />
