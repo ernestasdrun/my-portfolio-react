@@ -2,13 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import Skill from "./Skill";
 import skills from "../../data/skills";
+import { ITheme } from "../../assets/theme/theme";
 
 const StyledSkillsSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem 1rem 5rem 1rem;
-  background-color: rgb(255, 255, 255);
+  background-color: ${props => props.theme};
+  box-shadow: 0 0 0 100vmax rgb(255, 255, 255);
+  clip-path: inset(0 -100vmax);
 
   h2 {
     align-self: center;
