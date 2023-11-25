@@ -8,8 +8,8 @@ const ProjectsContainer = styled.section`
   flex-direction: column;
   row-gap: 2rem;
   padding: 2rem 1rem 5rem 1rem;
-  background-color: #e1f1ff;
-  box-shadow: 0 0 0 100vmax #e1f1ff;
+  background-color: rgb(225, 241, 255);
+  box-shadow: 0 0 0 100vmax rgb(225, 241, 255);
   clip-path: inset(0 -100vmax);
 
   h2 {

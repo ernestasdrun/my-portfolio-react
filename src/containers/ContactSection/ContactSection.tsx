@@ -9,6 +9,8 @@ const StyledContactSection = styled.section`
   flex-direction: column;
   padding: 2rem 1rem 5rem 1rem;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 0 100vmax rgb(255, 255, 255);
+  clip-path: inset(0 -100vmax);
 
   header {
     margin: auto;

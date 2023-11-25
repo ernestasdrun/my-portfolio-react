@@ -1,13 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import AboutSection from "./containers/AboutSection/AboutSection";
+import React, { useState } from "react";
+import styled, { ThemeProvider } from "styled-components";
 import ContactSection from "./containers/ContactSection/ContactSection";
 import Footer from "./containers/Footer/Footer";
 import Navbar from "./containers/Navbar/Navbar";
 import ProjectsSection from "./containers/ProjectsSection/ProjectsSection";
 import SkillsSection from "./containers/SkillsSection/SkillsSection";
-import { IconContext } from "react-icons/lib";
 import HeaderSection from "./containers/HeaderSection/HeaderSection";
+import theme, { ITheme } from "./assets/theme/theme";
 
 const PageContainer = styled.div`
   min-height: 100vh;
@@ -16,18 +15,19 @@ const PageContainer = styled.div`
 `;
 
 const App = () => {
+  const [currTheme, setCurrTheme] = useState<ITheme>(theme.lightTheme);
+
   return (
-    <IconContext.Provider value={{ className: "react-icons" }}>
+    <ThemeProvider theme={theme}>
       <PageContainer>
-        <Navbar />
+        <Navbar currTheme={currTheme} setCurrTheme={setCurrTheme} />
         <HeaderSection />
-        <AboutSection />
         <SkillsSection />
         <ProjectsSection />
         <ContactSection />
         <Footer />
       </PageContainer>
-    </IconContext.Provider>
+    </ThemeProvider>
   );
 };
 

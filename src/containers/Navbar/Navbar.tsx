@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
+import styled, { ThemeContext } from "styled-components";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import linkedinIcon from "../../assets/icons/linkedin.svg";
 import githubIcon from "../../assets/icons/github.svg";
@@ -8,6 +8,12 @@ import RoundedLinkButton from "../../components/buttons/RoundedLinkButton";
 import MenuButton from "./buttons/MenuButton";
 import NavbarDrawer from "./mobileDrawer/NavbarDrawer";
 import { LINKEDIN_LINK, GITHUB_LINK } from "../../data/socials";
+import { ITheme } from "../../assets/theme/theme";
+
+interface NavbarProps {
+  currTheme: ITheme;
+  setCurrTheme: React.Dispatch<React.SetStateAction<ITheme>>;
+}
 
 interface NavbarContainerProps {
   isScrolled: boolean;
@@ -80,7 +86,8 @@ const NavLink = styled.a`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({ currTheme, setCurrTheme }: NavbarProps) => {
+  const themeContext = useContext(ThemeContext);
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   const isScrolled = useScrolled(1);

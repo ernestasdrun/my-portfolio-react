@@ -21,10 +21,10 @@ const StyledSkill = styled.div<StyledSkillProps>`
   width: 230px;
   padding: 0.4rem 1rem;
   border-radius: 10px;
-  background-color: #f8f8f8;
+  background-color: rgb(248, 248, 248);
 
   :hover {
-    box-shadow: 0 5px 0 0 #e2e2e2;
+    box-shadow: 0 5px 0 0 rgb(226, 226, 226);
     transform: translateY(-5px);
   }
 
@@ -81,7 +81,11 @@ const Skill = ({ skill }: SkillProps) => {
 
   return (
     <StyledSkill ref={skillRef} isVisible={isVisible}>
-      <img draggable={false} src={skillImagePath + skill.image} alt={skill.name} />
+      <img
+        draggable={false}
+        src={skillImagePath + skill.image}
+        alt={skill.name}
+      />
       <h4>{skill.name}</h4>
     </StyledSkill>
   );
